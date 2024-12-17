@@ -12,7 +12,6 @@ PRODUCT_LIST = (By.CSS_SELECTOR, "[data-test*='ProductCardWrapper']")
 PRODUCT_IMAGES = (By.CSS_SELECTOR, "img")
 PRODUCT_NAMES = (By.CSS_SELECTOR, "div [data-test*='product-title']")
 
-
 @when('Click on Add to cart button')
 def click_add_to_cart(context):
     context.driver.wait.until(EC.visibility_of_element_located(ADD_TO_CART_BTN))
@@ -37,18 +36,23 @@ def confirm_add_to_cart(context):
 
 @then('verify {product} in search result')
 def verify_search_result(context, product):
-    actual_result = context.driver.find_element(By.CSS_SELECTOR, "[data-test='cartItem-price']")
-    expected_result = product
-    assert expected_result in actual_result.text, f'Expected text {expected_result} not in {actual_result}'
+    context.app.search_result.verify_search(product)
 
 
 @then('Verify each product has a product name and image')
 def verify_product_name_img(context):
+    # To see ALL listings (comment out if you only check top ones):
+    context.driver.execute_script("window.scrollBy(0,2000)", "")
+    sleep(4)
+    context.driver.execute_script("window.scrollBy(0,2000)", "")
+    #find all products in search result
     list_of_products = context.driver.find_elements(*PRODUCT_LIST)
-    print(list_of_products)
+    #print(list_of_products)
+    assert len(list_of_products) > 0, f'no product found'
 
 
     for product in list_of_products:
         title = product.find_element(*PRODUCT_NAMES).text
         assert title, 'product name not found'
+        #print(title)
         product.find_element(*PRODUCT_IMAGES)

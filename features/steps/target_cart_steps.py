@@ -4,16 +4,15 @@ from behave import given, when, then
 from selenium.webdriver.support import expected_conditions as EC
 
 
+CART_EMPTY_MSG = (By.CSS_SELECTOR, "[data-test='boxEmptyMsg']")
+
 @when('Open target cart page')
 def open_cart_page(context):
-    context.driver.get('https://www.target.com/cart')
-
+    context.app.cart_page.target_cart_page()
 
 @then("Verify cart is empty message")
 def verify_cart(context):
-    expected_text = 'Your cart is empty'
-    actual_text = context.driver.find_element(By.CSS_SELECTOR, "[data-test='boxEmptyMsg']").text
-    assert expected_text in actual_text, f'{expected_text} not found in {actual_text}'
+    context.app.cart_page.verify_empty_cart()
 
 
 @then('Verify cart has correct product price')

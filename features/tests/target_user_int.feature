@@ -15,14 +15,12 @@ Feature: Test for Target User Interaction
 
   Scenario: User can search for Tea
     Given Open Target page
-    When locate target search box
-    And  input Tea to target search box
+    When  input Tea to target search box
     Then  verify Tea in search result
 
 
   Scenario: Verify user can add product to cart
     Given Open Target page
-    When locate target search box
     When  input mug to target search box
     And Click on Add to cart button
     And store product price
@@ -35,5 +33,4 @@ Feature: Test for Target User Interaction
     Given Open Target page
     When Open Target circle page from header
     Then Locate 14 benefit cells
-
 
