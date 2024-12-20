@@ -1,11 +1,16 @@
-from selenium.webdriver.common.by import By
 from behave import given, when, then
 
 
 
 @then('Verify signin page pops up')
-def verify_signin(context):
-    expected_result = 'Sign into your Target account'
-    # actual_result = context.driver.find_element(By.XPATH, "//*[contains(text(), 'Sign into')]").text
-    actual_result = context.driver.find_element(By.CSS_SELECTOR, "h1>span").text
-    assert expected_result in actual_result, f'{expected_result} not found in {actual_result}'
+def verify_signin_Pg(context):
+    context.app.signin_page.verify_signin_page()
+
+
+@when('Login with a valid email and password')
+def login_credentials(context):
+    context.app.signin_page.signin_to_profile()
+
+@then('Verify user is logged in successfully')
+def verify_login_success(context):
+    context.app.signin_page.verify_signin_success()

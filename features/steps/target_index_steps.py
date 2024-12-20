@@ -4,7 +4,7 @@ from behave import given, when, then
 
 CIRCLE_PAGE_BTN = (By.CSS_SELECTOR, "#utilityNav-circle")
 SIGNIN_BTN = (By.XPATH, "//*[@data-test= 'accountNav-signIn']")
-
+SIGNIN_NAV = (By.ID, 'account-sign-in')
 
 @given('Open Target page')
 def open_main_page(context):
@@ -14,12 +14,12 @@ def open_main_page(context):
 
 @when('Open signin navigation')
 def open_signin_nav(context):
-    context.driver.find_element(By.ID, 'account-sign-in').click()
+    context.app.header.signin_nav_btn()
 
 
 @when('Click signin button')
 def click_signin(context):
-    context.driver.find_element(*SIGNIN_BTN).click()
+    context.app.header.signin_btn()
 
 
 @when('Locate and click on cart icon')
@@ -34,4 +34,4 @@ def input_to_search_box(context, product):
 
 @when('Open Target circle page from header')
 def open_circle_page(context):
-    context.driver.find_element(*CIRCLE_PAGE_BTN).click()
+    context.app.header.click_circle_page_btn()
