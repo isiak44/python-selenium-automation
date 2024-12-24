@@ -21,15 +21,15 @@ Feature: Test for Target User Interaction
     Then Verify cart is empty message
 
 
-  Scenario: User can search for Tea
+  Scenario: User can search for Coffee
     Given Open Target page
-    When  input Tea to target search box
-    Then  verify Tea in search result
-    Then verify search term Tea in current url
+    When  input coffee to target search box
+    Then  verify coffee in search result
+    Then verify search term coffee in current url
 
   Scenario: Verify user can add product to cart
     Given Open Target page
-    When  input mug to target search box
+    When  input coffee to target search box
     And Click on Add to cart button
     And store product name
     And Click Add to cart button from side nav
@@ -42,3 +42,13 @@ Feature: Test for Target User Interaction
     When Open Target circle page from header
     Then Locate 14 benefit cells
 
+
+  Scenario: User can open and close Terms and Conditions from sign in page
+   Given Open Target page
+    When Open signin navigation
+    And Click signin button
+   When Store original window
+   And Click on Target terms and conditions link
+   And Switch to the newly opened window
+   Then Verify Terms and Conditions page is opened
+   And User can close new window and switch back to original

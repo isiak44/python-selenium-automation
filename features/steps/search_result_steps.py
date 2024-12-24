@@ -25,6 +25,7 @@ def store_product_price(context):
 @when('store product name')
 def store_product_name(context):
    context.product_name = context.app.search_result.store_item_name()
+   print('Product stored:', context.product_name)
 
 @when('Click Add to cart button from side nav')
 def confirm_add_to_cart(context):

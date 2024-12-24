@@ -15,6 +15,25 @@ class BasePage:
     def click(self, *locator):
         self.driver.find_element(*locator).click()
 
+    def get_current_window_handle(self):
+        current_window = self.driver.current_window_handle
+        print(current_window)
+        return current_window
+
+    def switch_to_new_window(self):
+        self.wait.until(EC.new_window_is_opened)
+        all_windows = self.driver.window_handles
+        print('All windows: ', all_windows)
+        self.driver.switch_to.window(all_windows[1])
+        print(self.driver.current_window_handle)
+
+    def close_current_window(self):
+        self.driver.close()
+
+    def switch_window_by_id(self, window_id):
+        self.driver.switch_to.window(window_id)
+        print('Current window: ', self.driver.current_window_handle)
+
     def find_element(self, *locator):
         return self.driver.find_element(*locator)
 

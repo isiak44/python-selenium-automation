@@ -5,6 +5,7 @@ from pages.main_page import HomePage
 from pages.search_result import SearchResult
 from pages.signin_page import SigninPage
 from pages.circle_page import CirclePage
+from pages.terms_and_cons_page import TermsAndConsPage
 
 class Application:
     def __init__(self, driver):
@@ -17,3 +18,4 @@ class Application:
         self.cart_page = CartPage(self.driver)
         self.signin_page = SigninPage(self.driver)
         self.circle_page = CirclePage(self.driver)
+        self.terms_and_cons_page = TermsAndConsPage(self.driver)
