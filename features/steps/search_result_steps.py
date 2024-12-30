@@ -32,6 +32,17 @@ def confirm_add_to_cart(context):
     context.app.search_result.add_to_cart_from_nav()
 
 
+@when('Hover favorites icon')
+def hover_fav_icon(context):
+    context.app.search_result.hover_fav_icon()
+    sleep(5)
+
+
+@then('Verify favorites tooltip is shown')
+def verify_fav_tooltip(context):
+    context.app.search_result.verify_fav_icon()
+
+
 @then('verify {product} in search result')
 def verify_search_result(context, product):
     context.app.search_result.verify_search(product)

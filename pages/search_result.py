@@ -8,6 +8,8 @@ class SearchResult(BasePage):
     PRODUCT_NAME = (By.CSS_SELECTOR, "[data-test='content-wrapper'] h4")
     PRODUCT_PRICE = (By.CSS_SELECTOR, "[data-test='product-price']")
     ADD_TO_CART_BTN_SIDENAV = (By.CSS_SELECTOR, "[data-test='content-wrapper'] [id*='addToCart']")
+    FAV_BTN = (By.CSS_SELECTOR, "[data-test='FavoritesButton']")
+    FAV_TOOLTIP_TXT = (By.XPATH, "//*[text()='Click to sign in and save']")
 
     def verify_search(self, product):
         self.verify_partial_text(product, *self.SEARCH_RESULT)
@@ -27,5 +29,9 @@ class SearchResult(BasePage):
     def add_to_cart_from_nav(self):
         self.wait_and_click(*self.ADD_TO_CART_BTN_SIDENAV)
 
+    def hover_fav_icon(self):
+        self.hover_element(*self.FAV_BTN)
 
+    def verify_fav_icon(self):
+        self.wait_until_visible(*self.FAV_TOOLTIP_TXT)
 

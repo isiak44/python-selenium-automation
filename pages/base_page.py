@@ -1,5 +1,6 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 
 class BasePage:
     def __init__(self, driver):
@@ -33,6 +34,17 @@ class BasePage:
     def switch_window_by_id(self, window_id):
         self.driver.switch_to.window(window_id)
         print('Current window: ', self.driver.current_window_handle)
+
+    def hover_element(self, *locator):
+        element = self.driver.find_element(*locator)
+        action = ActionChains(self.driver)
+        action.move_to_element(element).perform()
+
+    def hover_element_click(self, *locator):
+        element = self.driver.find_element(*locator)
+        action = ActionChains(self.driver)
+        action.move_to_element(element).click().perform()
+
 
     def find_element(self, *locator):
         return self.driver.find_element(*locator)

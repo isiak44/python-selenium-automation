@@ -52,3 +52,32 @@ Feature: Test for Target User Interaction
    And Switch to the newly opened window
    Then Verify Terms and Conditions page is opened
    And User can close new window and switch back to original
+
+
+  Scenario: User can select help topic target account
+    Given Open target help page for returns
+    Then Verify help topic Returns page opened
+    When Select help topic Target Account in dropdown
+    Then Verify help topic Create account page opened
+
+
+  Scenario: User can select help topic gift cards
+    Given Open target help page for returns
+    Then Verify help topic Returns page opened
+    When Select help topic Gift Cards in dropdown
+    Then Verify help topic Target GiftCard balance page opened
+
+
+  Scenario: User can not login with invalid credentials
+   Given Open Target page
+    When Open signin navigation
+    And Click signin button
+    And Login with an invalid email and password
+    Then Verify error message is displayed
+
+
+  Scenario: User can see favorites tooltip for search results
+    Given Open Target page
+    When Input Tea to target search box
+    And Hover favorites icon
+    Then Verify favorites tooltip is shown
