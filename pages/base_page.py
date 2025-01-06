@@ -1,6 +1,8 @@
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from support.logger import logger
+
 
 class BasePage:
     def __init__(self, driver):
@@ -9,12 +11,14 @@ class BasePage:
 
     def open_url(self, url):
         self.driver.get(url)
+        logger.info(f'Opening url: {url}')
 
     def get_url(self):
         return self.driver.current_url
 
     def click(self, *locator):
         self.driver.find_element(*locator).click()
+        logger.info(f'Clicking element by {locator}')
 
     def get_current_window_handle(self):
         current_window = self.driver.current_window_handle
@@ -32,6 +36,7 @@ class BasePage:
         self.driver.close()
 
     def switch_window_by_id(self, window_id):
+        logger.info(f'switching to window by id: {window_id}')
         self.driver.switch_to.window(window_id)
         print('Current window: ', self.driver.current_window_handle)
 
@@ -47,34 +52,44 @@ class BasePage:
 
 
     def find_element(self, *locator):
+        logger.info(f'Finding element by {locator}')
         return self.driver.find_element(*locator)
 
+
     def find_elements(self, *locator):
+        logger.info(f'Finding elements by {locator}')
         return self.driver.find_elements(*locator)
 
     def input_text(self, text, *locator):
+        logger.info(f'Inputting  text {text} by {locator}')
         self.driver.find_element(*locator).send_keys(text)
 
     def clear(self, *locator):
         self.driver.find_element(*locator).clear()
 
     def verify_partial_text(self, expected_text, *locator):
+        logger.info(f'Verifying partial text {expected_text} by {locator}')
         actual_text = self.find_element(*locator).text
         assert expected_text in actual_text, f'Expected {expected_text} not in {actual_text}'
 
+
     def verify_text(self, expected_text, *locator):
+        logger.info(f'Verifying text {expected_text} by {locator}')
         actual_text = self.find_element(*locator).text
         assert expected_text == actual_text, f'Expected {expected_text} but got {actual_text}'
 
     def verify_partial_url(self, expected_url):
+        logger.info(f'Verifying partial url {expected_url}')
         actual_url = self.driver.current_url
         assert expected_url in actual_url, f'Expected Partial Url {expected_url} not found in current url {actual_url}'
 
     def verify_url(self, expected_url):
+        logger.info(f'Verifying url {expected_url}')
         actual_url = self.driver.current_url
         assert expected_url == actual_url, f'Expected Url {expected_url} does not match current url {actual_url}'
 
     def wait_until_visible(self, *locator):
+        logger.info(f'Wait until element is visible by {locator}')
         return self.wait.until(
             EC.visibility_of_element_located(locator),
             message= f'Element by {locator} not visible'

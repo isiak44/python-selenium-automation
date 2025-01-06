@@ -1,5 +1,6 @@
 Feature: Test for Target User Interaction
 
+  @smoke
   Scenario: Verify Logged Out User Can Access Sign In
     Given Open Target page
     When Open signin navigation
@@ -14,7 +15,7 @@ Feature: Test for Target User Interaction
     And Login with a valid email and password
     Then Verify user is logged in successfully
 
-
+  @smoke
   Scenario: User Can Verify Empty cart Message
     Given Open Target page
     When Locate and click on cart icon

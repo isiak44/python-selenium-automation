@@ -1,8 +1,6 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 
-DD_MENU = (By.CSS_SELECTOR, "select[id*='contentTemplate']")
-LEFT_NAV_H2 = (By.CSS_SELECTOR, "#leftNavArea h2")
 
 @given('Open target help page for returns')
 def open_target_help_page(context):
